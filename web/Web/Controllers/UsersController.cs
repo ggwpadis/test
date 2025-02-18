@@ -26,8 +26,10 @@ namespace WebApp.Controllers
         {
             if (id == null) return NotFound();
 
-            var user = await _context.Users.FindAsync(id);
+            if (!int.TryParse(id, out int userId)) return NotFound();
+            var user = await _context.Users.FindAsync(userId);
             if (user == null) return NotFound();
+   
 
             return View(user);
         }
@@ -57,8 +59,11 @@ namespace WebApp.Controllers
         {
             if (id == null) return NotFound();
 
-            var user = await _context.Users.FindAsync(id);
+            if (!int.TryParse(id, out int userId)) return NotFound();
+            var user = await _context.Users.FindAsync(userId);
             if (user == null) return NotFound();
+
+
 
             return View(user);
         }
@@ -84,8 +89,10 @@ namespace WebApp.Controllers
         {
             if (id == null) return NotFound();
 
-            var user = await _context.Users.FindAsync(id);
+            if (!int.TryParse(id, out int userId)) return NotFound();
+            var user = await _context.Users.FindAsync(userId);
             if (user == null) return NotFound();
+         
 
             return View(user);
         }
@@ -93,7 +100,7 @@ namespace WebApp.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user != null)
